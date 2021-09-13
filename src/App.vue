@@ -1,17 +1,122 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img src="./assets/ligneh.svg" width="10%"><br><br>
+    <h1>Traducteur des codes missions de la ligne H</h1>
+    <label>Code mission: <input maxlength="4" v-model="codeMission" type="text"></label>
+    <p style="font-size: 2em;">{{ explainCode }}</p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "codeExplainer",
+  computed: {
+    explainCode: function () {
+      if(this.codeMission.length === 4) {
+        let terminus;
+        switch (this.codeMission[0]) {
+          case "A":
+            terminus="Paris";
+            break
+
+          case "B":
+            terminus="Beauchamps";
+            break
+
+          case "O":
+            terminus="Pontoise";
+            break
+
+          case "D":
+            terminus="Saint-Denis";
+            break
+
+          case "L":
+            terminus="Luzarches";
+            break
+
+          case "F":
+            terminus="Saint-Leu-la-Forêt"
+            break
+
+          case "V":
+            terminus="Valmondois";
+            break
+
+          case "P":
+            terminus="Persan Beaumont"
+            break
+
+          case "M":
+            terminus="Montsoult"
+            break
+        }
+        let origine = "";
+        switch (this.codeMission[3]) {
+          case "A":
+            origine="Paris";
+            break
+
+          case "O":
+            origine="Pontoise";
+            break
+
+          case "B":
+            origine="Beauchamps";
+            break
+
+          case "D":
+            origine="Saint-Denis";
+            break
+
+          case "L":
+            origine="Luzarches";
+            break
+
+          case "F":
+            origine="Saint-Leu-la-Forêt"
+            break
+
+          case "V":
+            origine="Valmondois";
+            break
+
+          case "P":
+            origine="Persan Beaumont"
+            break
+
+          case "M":
+            origine="Montsoult"
+            break
+        }
+        let template = `Le train ${this.codeMission} part de ${origine} en direction ${terminus}. Il `
+
+        let desserte = "";
+        for (let i = 1; i < 3; i++) {
+          switch (this.codeMission[i]) {
+            case "O":
+              desserte="sera omnibus.";
+              break
+
+            case "R":
+              desserte="sera semi-direct."
+              break
+          }
+        }
+        template=template+desserte
+
+
+        return template;
+      } else {
+        return "";
+      }
+    }
+  },
+  data() {
+    let codeMission = "";
+    return {
+      codeMission
+    }
   }
 }
 </script>
