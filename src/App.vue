@@ -89,17 +89,17 @@ export default {
             origine="Montsoult"
             break
         }
-        let template = `Le train ${this.codeMission} part de ${origine} en direction ${terminus}. Il `
+        let template = `Le train ${this.codeMission} part de ${origine} en direction ${terminus}.`
 
         let desserte = "";
         for (let i = 1; i < 3; i++) {
           switch (this.codeMission[i]) {
             case "O":
-              desserte="sera omnibus.";
+              desserte=" Il sera omnibus.";
               break
 
             case "R":
-              desserte="sera semi-direct."
+              desserte=" Il sera semi-direct."
               break
           }
         }
@@ -116,6 +116,11 @@ export default {
     let codeMission = "";
     return {
       codeMission
+    }
+  },
+  watch:{
+    codeMission: function(){
+      this.codeMission = this.codeMission.toUpperCase();
     }
   }
 }
